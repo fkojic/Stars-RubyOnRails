@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : 'Shooting stars' %> </title>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+    
+  <body>
+  	    <header class="site-header">
+        <div class="main-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1 col-sm-6 col-xs-8">
+                        <div class="logo">
+                            <h1><%= link_to image_tag('stars_logo'), root_path %></a></h1>
+
+                        </div> <!-- /.logo -->
+                    </div> <!-- /.col-md-4 -->
+                    <div class="col-md-11">
+                        </br>
+                        <div class="main-nav">
+                        <div class="list-menu">
+                            <ul>
+                                <li><%= link_to "All Picture", root_path %></li>
+                                <% if user_signed_in? %>
+                                    <li><%= link_to "Profile", controller: "users", action: "index"  %></li>
+                                <% end %>
+                                <li><%= link_to "Add Picture", new_post_path %></li>
+                                
+                                <% if user_signed_in? %>
+                                    
+                                    <li><%= link_to 'Logout', destroy_user_session_path, :methiod => :get %></li>
+                                <% else %>
+                                    <li><%= link_to 'Sign Up', '/users/sign_up' %></li>
+
+                                    <li><%= link_to 'Login', '/users/sign_in' %></li>
+                                <% end %>
+                            </ul>
+                        </div> <!-- /.list-menu -->
+                    </div>
+                    </div> <!-- /.col-md-6 -->
+                    </div> <!-- /.col-md-8 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+        </div> <!-- /.main-header -->
+        <div class="main-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-7">
+                      </div>  
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+        </div> <!-- /.main-nav -->
+    </header> <!-- /.site-header -->
+    <div class="content-section">
+        <div class="content-section">
+            <div class="container">
+                <div class="row">
+
+                    <%= yield %> <!-- SADRZAJ -->
+
+                </div>
+            </div>
+        </div>
+	</div>
+
+    <footer class="site-footer">
+        <div class="our-partner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+        </div> <!-- /.our-partner -->
+        
+        <div class="bottom-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <span>Copyright &copy; 2018 <a href="https://www.linkedin.com/in/filip-kojic-28a98813b/" target="blank">Filip Kojic</a> | Design: <a href="http://www.templatemo.com">templatemo</a></span>
+                        <p></p>
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+        </div> <!-- /.bottom-footer -->
+    </footer> <!-- /.site-footer -->
+
+  </body>
+</html>

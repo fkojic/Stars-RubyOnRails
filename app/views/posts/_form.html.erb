@@ -1,0 +1,35 @@
+<div class="col-md-6">
+<div class="contact-form">
+<%= form_with(model: post, html: { multipart: true }, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :description, :class => "col-sm-2 col-form-label" %>
+    <%= form.text_area :description, id: :post_description %>
+  </p>
+
+  <p>
+    <%= form.label :picture, :class => "col-sm-2 col-form-label" %>
+    <%= form.file_field :picture, id: :post_picture %>
+    <% if form.object.picture? %>
+  </br>
+      <%= image_tag form.object.picture.url %>
+    <% end %>
+  </p>
+</br>
+  <p>
+    <%= form.submit "Add Post", :class => "btn btn-secondary btn-lg btn-block" %>
+  </p>
+<% end %>
+</div>
+</div>

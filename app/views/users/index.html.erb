@@ -1,0 +1,70 @@
+<% title @user.user_name %>
+<div class="row">
+<div class="col-md-3">
+                    <div class="product-item-1">
+                        <div class="product-thumb">
+                            <%= image_tag @user.profile_picture.url %>
+
+                        </div> <!-- /.product-thumb -->
+                    </div> <!-- /.product-item -->
+                </div> <!-- /.col-md-3 -->
+                <div class="col-md-5">
+                    <div class="product-item-1">
+                            <h5><%= full_name %><%= session['id'] %></h5>
+                            <span class="tagline"><%= @user.date_of_birthday.to_date.to_formatted_s(:long_ordinal) %></span>
+                            
+                        <div class="clearfix"></div>
+                    </div> <!-- /.product-holder -->
+                </div> <!-- /.col-md-5 -->
+            </div>
+                <hr>
+<% @posts.each do |post| %>
+<div class="col-md-3 col-sm-6">
+    <div class="product-item-vote">
+        <div class="product-thumb">
+            <%= link_to image_tag(post.picture.url), post %>
+        </div> <!-- /.product-thum -->
+        <div class="product-content">
+            <div class="product-content border border-white">
+            <p><%= post.description %></p>
+            </div>
+            <ul class="progess-bars">
+                <li>
+                    <div class="progress">
+                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                        <span class="comments">6</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+                        <span>4</span>
+                    </div>
+                </li>
+                <div class="progress">
+                        <span class="comments"><i class="fa fa-arrow-up"></i></span>
+                    </div>
+                <div class="progress">
+                        <span class="progress"><i class="fa fa-arrow-down"></i></span>
+                </div>
+            </ul>
+            <% if post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to raw("<i class='fa fa-trash-o' aria-hidden='true'></i>"), post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+        </div> <!-- /.product-content -->
+    </div> <!-- /.product-item-vote -->
+</div> <!-- /.col-md-3 -->
+<% end %>
+<div class="col-md-3 col-sm-6">
+    <div class="product-item-vote">
+        <div class="product-thumb">
+            <%= link_to image_tag("plus.png"), new_post_path %>
+        </div> <!-- /.product-thum -->
+        <div class="product-content">
+            <div class="product-content border border-white">
+            
+            </div>
+        </div> <!-- /.product-content -->
+    </div> <!-- /.product-item-vote -->
+</div> <!-- /.col-md-3 -->

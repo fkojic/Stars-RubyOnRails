@@ -1,0 +1,29 @@
+<div class="col-md-8">
+    <div class="product-image">
+  		<%= image_tag @post.picture.url %>
+	</div> <!-- /.product-image -->
+	<div class="product-item-vote">
+    <div class="product-content">
+    	<p><%= @post.description %></p>
+    	<span class="tagline">By: <%= link_to post.user.user_name, controller: "users", action: "index", id: post.user_id %></span>
+			<ul class="progess-bars">
+                <li>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+                        <span>4<i class="fa fa-heart"></i></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="progress">
+                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                        <span class="comments">6<i class="fa fa-heart"></i></span>
+                    </div>
+                </li>
+            </ul>
+        </div> <!-- /.product-information -->
+    </div>
+<% if post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to raw("<i class='fa fa-trash-o' aria-hidden='true'></i>"), post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>  
+</div> 
