@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for?(:title) ? yield(:title) : 'Shooting stars' %> </title>
-    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="<%= image_path("stars_logo.png") %>" type="image/x-icon" />
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -61,8 +61,8 @@
         <div class="content-section">
             <div class="container">
                 <div class="row">
-
-                    <%= yield %> <!-- SADRZAJ -->
+                    <!-- SADRZAJ -->
+                    <%= yield %> 
 
                 </div>
             </div>

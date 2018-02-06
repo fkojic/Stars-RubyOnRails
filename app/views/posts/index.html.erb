@@ -1,5 +1,8 @@
 <% title "Home" %>
-<% @posts.each do |post| %>
+<% 
+@posts.each do |post| 
+
+%>
 <div class="col-md-3 col-sm-6">
     <div class="product-item-vote">
         <div class="product-thumb">
@@ -9,7 +12,7 @@
             <div class="product-content border border-white">
             <p><%= post.description %></p>
             </div>
-            <span class="tagline">By: <%= link_to post.user.user_name, controller: "users", action: "index", id: post.user_id %></span>
+            <span class="tagline">By: <%= link_to post.user.user_name, controller: "users", action: "index", id: post.user_id %></span><span class="tagline"><%= time_ago_in_words(post.created_at) %> ago</span>
             <ul class="progess-bars">
                 <li>
                     <div class="progress">
@@ -24,17 +27,39 @@
                     </div>
                 </li>
                 <div class="progress">
-                        <span class="comments"><i class="fa fa-arrow-up"></i></span>
+                        <%= link_to raw("<span class='comments yes'><i class='fa fa-arrow-up'></i></span>"), '#', id: 'progress_yes', remote: true, value: post.id %>
+                         
                     </div>
                 <div class="progress">
-                        <span class="progress"><i class="fa fa-arrow-down"></i></span>
+                        <span class="progress no" id="<%= post.id %>"><i class="fa fa-arrow-down"></i></span>
                 </div>
+
+                <div id="proizvodi">
+                    <% if @id != nil %>
+                        <h2><% @id %></h2>
+                    <% end %>
+                </div>
+
             </ul>
-            <% if post.user == current_user %>
-            <%= link_to 'Edit', edit_post_path(post) %>
-            <%= link_to raw("<i class='fa fa-trash-o' aria-hidden='true'></i>"), post, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
         </div> <!-- /.product-content -->
     </div> <!-- /.product-item-vote -->
 </div> <!-- /.col-md-3 -->
-<% end %>
+<%  $i = 0
+    $i += 1
+  if ($i == 4) %> </div><div class="row"><% end
+ end %>
+
+<div class="row">
+<div class="col-md-3 col-sm-6">
+    <div class="product-item-vote">
+        <div class="product-thumb">
+            <%= link_to image_tag("plus.png"), new_post_path %>
+        </div> <!-- /.product-thum -->
+        <div class="product-content">
+            <div class="product-content border border-white">
+            
+            </div>
+        </div> <!-- /.product-content -->
+    </div> <!-- /.product-item-vote -->
+</div> <!-- /.col-md-3 -->
+</div>
